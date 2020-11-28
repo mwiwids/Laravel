@@ -24,4 +24,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /**
  * route resource post
  */
-Route::resource('/post', PostController::class);
+// Route::resource('/post', PostController::class);
