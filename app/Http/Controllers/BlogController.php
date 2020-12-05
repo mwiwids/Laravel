@@ -117,4 +117,28 @@ class BlogController extends Controller
             return redirect()->route('blog.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
     }
+
+    /**
+    * destroy
+    *
+    * @param  mixed $blog
+    * @return void
+    */
+    public function destroy(Blog $blog)
+    {
+        //hapus old image
+        Storage::disk('local')->delete('public/blogs/'.$blog->image);
+
+        //get data Blog by ID
+        $blog = Blog::findOrFail($blog->id);
+        $blog->delete();
+
+        if($blog){
+            //redirect dengan pesan sukses
+            return redirect()->route('blog.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        }else{
+            //redirect dengan pesan error
+            return redirect()->route('blog.index')->with(['error' => 'Data Gagal Dihapus!']);
+        }
+    }
 }
